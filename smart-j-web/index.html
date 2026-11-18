@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMART-J | Portal Penerimaan & Pemeriksaan Material</title>
+  <link rel="icon" type="image/png" href="./assets/logo-smartj.png" />
+  <meta name="author" content="Allif Cendikiawan — Quality Engineer" />
+  <meta name="copyright" content="© 2026 Allif Cendikiawan — Quality Engineer. All Rights Reserved." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 1: HALAMAN LOGIN                                                 -->
+  <!-- ===================================================================== -->
+  <div id="loginView"
+    class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200">
+      <div class="bg-blue-900 px-6 py-6 text-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <span
+              class="inline-block px-2.5 py-0.5 text-xs font-semibold tracking-wider uppercase bg-blue-700 rounded-full mb-2">
+              Quality & Receiving System
+            </span>
+            <h1 class="text-2xl font-bold tracking-tight">SMART-J Online</h1>
+            <p class="text-xs text-blue-200 mt-1">Material Receiving, Inspection & BA Closing Portal</p>
+          </div>
+          <div class="w-14 h-14 rounded-xl bg-white p-1.5 flex items-center justify-center shadow-md shrink-0">
+            <img src="./assets/logo-smartj.png" alt="Logo SMART-J" class="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+
+      <form id="loginForm" class="p-6 space-y-4">
+        <div id="loginAlert" class="hidden p-3 rounded-lg text-sm"></div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <input type="text" id="loginUsername" required autocomplete="username" placeholder="Masukkan username akun"
+              class="w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="loginPassword" required autocomplete="current-password"
+              placeholder="Masukkan password"
+              class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+            <button type="button" id="togglePasswordBtn"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="loginSubmitBtn"
+          class="w-full py-2.5 px-4 bg-blue-800 hover:bg-blue-900 text-white font-semibold rounded-lg text-sm transition flex items-center justify-center gap-2 shadow-sm">
+          <span>Masuk ke Sistem</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <!-- Panel Status & Pengaturan Endpoint API (Untuk Pengujian Live Server) -->
+        <div class="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+          <button type="button" id="pingApiBtn"
+            class="text-blue-700 hover:underline flex items-center gap-1.5 font-medium">
+            <i class="fa-solid fa-plug-circle-check"></i>
+            <span>Cek Koneksi API</span>
+          </button>
+          <button type="button" id="toggleApiConfigBtn"
+            class="text-slate-500 hover:text-slate-700 flex items-center gap-1">
+            <i class="fa-solid fa-gear"></i>
+            <span>URL API</span>
+          </button>
+        </div>
+
+        <div id="apiConfigBox" class="hidden pt-2 space-y-2">
+          <label class="block text-xs font-medium text-slate-600">Override URL Apps Script (`/exec`):</label>
+          <input type="url" id="customApiUrlInput" placeholder="https://script.google.com/macros/s/.../exec"
+            class="w-full px-2.5 py-1.5 border border-slate-300 rounded text-xs" />
+          <div class="flex gap-2">
+            <button type="button" id="saveApiUrlBtn"
+              class="px-3 py-1 bg-slate-800 text-white rounded text-xs hover:bg-slate-900">
+              Simpan URL
+            </button>
+            <button type="button" id="resetApiUrlBtn"
+              class="px-3 py-1 bg-slate-200 text-slate-700 rounded text-xs hover:bg-slate-300">
+              Reset Default
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Footer Hak Cipta Halaman Login -->
+      <div class="bg-slate-50 border-t border-slate-200 px-6 py-3 text-center text-[11px] text-slate-500">
+        <div>&copy; 2026 <strong>SMART-J System</strong></div>
+        <div class="mt-0.5">
+          Created &amp; Engineered by <strong class="text-slate-700">Allif Cendikiawan</strong> &mdash; Quality Engineer
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 2: DASHBOARD UTAMA (SETELAH LOGIN)                               -->
+  <!-- ===================================================================== -->
+  <div id="dashboardView" class="hidden min-h-screen flex flex-col md:flex-row">
+
+    <!-- Sidebar Navigasi -->
+    <aside class="w-full md:w-64 bg-slate-900 text-slate-200 flex flex-col shrink-0">
+      <div class="p-5 border-b border-slate-800 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-sm">
+          <img src="./assets/logo-smartj.png" alt="Logo SMART-J" class="w-full h-full object-contain" />
+        </div>
+        <div>
+          <div class="font-bold text-white tracking-wide">SMART-J</div>
+          <div class="text-[11px] text-slate-400">Online Portal v1.0</div>
+        </div>
+      </div>
+
+      <!-- Info User & Role -->
+      <div class="p-4 border-b border-slate-800 bg-slate-800/50">
+        <div id="sidebarFullName" class="text-sm font-semibold text-white truncate">-</div>
+        <div class="flex items-center gap-2 mt-1">
+          <span id="sidebarRoleBadge" class="px-2 py-0.5 text-[11px] font-bold rounded bg-blue-600 text-white">
+            ROLE
+          </span>
+          <span id="sidebarVendorId" class="text-[11px] text-slate-400 truncate"></span>
+        </div>
+      </div>
+
+      <!-- Menu Dinamis Sesuai Role -->
+      <nav id="sidebarMenu" class="flex-1 p-3 space-y-1 overflow-y-auto"></nav>
+
+      <!-- Tombol Logout -->
+      <div class="p-4 border-t border-slate-800">
+        <button id="logoutBtn"
+          class="w-full py-2 px-3 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white text-sm font-medium transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Keluar / Logout</span>
+        </button>
+        <div class="pt-2 border-t border-slate-800/80 text-center text-[10px] text-slate-400 leading-relaxed">
+          <div>&copy; 2026 SMART-J v1.0</div>
+          <div class="text-slate-300 font-semibold">Allif Cendikiawan</div>
+          <div class="text-blue-400">Quality Engineer</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Konten Utama -->
+    <main class="flex-1 flex flex-col min-w-0">
+      <!-- Top Header -->
+      <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 id="pageTitle" class="text-lg font-bold text-slate-800">Dashboard Ringkasan</h2>
+          <p id="pageSubtitle" class="text-xs text-slate-500">Status operasional penerimaan, pemeriksaan, dan closing
+            material</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="refreshDataBtn"
+            class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-rotate"></i>
+            <span>Refresh Data</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Area Konten Dinamis -->
+      <div id="mainContentArea" class="p-6 space-y-6 flex-1 overflow-y-auto">
+        <!-- Diisi oleh js/app.js -->
+      </div>
+      <!-- Footer Hak Cipta Dashboard -->
+      <footer
+        class="bg-white border-t border-slate-200 px-6 py-3 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2">
+        <span>&copy; 2026 <strong>SMART-J</strong> &mdash; Material Receiving, Inspection &amp; BA Closing Portal</span>
+        <span>Developed by <strong class="text-slate-800">Allif Cendikiawan</strong> (Quality Engineer)</span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/config.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/admin_master.js"></script>
+  <script src="./js/delivery_receiving.js"></script>
+  <script src="./js/inspection_closing.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+
+</html>
