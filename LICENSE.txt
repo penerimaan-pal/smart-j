@@ -1,0 +1,12 @@
+PROPRIETARY SOFTWARE LICENSE — ALL RIGHTS RESERVED
+
+Copyright (c) 2026 Allif Cendikiawan — Quality Engineer
+Project: SMART-J (Sistem Monitoring Penerimaan & Pemeriksaan Material)
+
+Hak cipta sepenuhnya dimiliki oleh Allif Cendikiawan (Quality Engineer).
+Perangkat lunak, desain antarmuka, arsitektur database, dan kode sumber ini
+dibuat dan dikembangkan secara eksklusif oleh Allif Cendikiawan.
+
+Dilarang menyalin, memodifikasi, mendistribusikan ulang, menghapus identitas
+pembuat, atau mengklaim kepemilikan atas sebagian maupun seluruh kode sumber
+dan sistem ini tanpa izin tertulis dari pemilik hak cipta.
